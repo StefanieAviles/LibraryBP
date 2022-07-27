@@ -1,11 +1,14 @@
 import { FormRegister } from '../molecules/FormRegister'
 
-export function Register() {
+export function Register({ navigateFunction, locationFunction }) {
   return (
     <div className="App">
       <header className="App-header"></header>
       <h1>Register</h1>
-      <FormRegister></FormRegister>
+      <FormRegister
+        navigateFunction={navigateFunction}
+        locationFunction={locationFunction}
+      ></FormRegister>
     </div>
   )
 }

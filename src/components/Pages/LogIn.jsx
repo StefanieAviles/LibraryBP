@@ -1,12 +1,11 @@
 import { Form } from '../molecules/Form'
 
-export function LogIn() {
+export function LogIn({ navigateFunction, locationFunction }) {
   return (
     <div className="App">
       <header className="App-header"></header>
-      <h1>Log In</h1>
-      <Form></Form>
-      <a href="http://localhost:3000/register">No tienes cuenta: Registrate</a>
+      <h1>Iniciar Sesion</h1>
+      <Form navigateFunction={navigateFunction} locationFunction={locationFunction}></Form>
     </div>
   )
 }

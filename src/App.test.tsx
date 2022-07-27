@@ -6,7 +6,7 @@ import { Home } from './components/Pages/Home'
 import { Register } from './components/Pages/Register'
 
 describe('Router function', () => {
-  it('Render Login', () => {
+  /* it('Render Login', () => {
     const history = createMemoryHistory()
     render(
       <Router location={history.location} navigator={history}>
@@ -15,7 +15,7 @@ describe('Router function', () => {
     )
     const textLogin = screen.getByText(/login/i)
     expect(textLogin).toBeInTheDocument()
-  })
+  }) */
   it('Render Home', () => {
     const history = createMemoryHistory()
     render(
@@ -26,7 +26,7 @@ describe('Router function', () => {
     const textHome = screen.getByText(/home/i)
     expect(textHome).toBeInTheDocument()
   })
-  it('Render Register', () => {
+  /* it('Render Register', () => {
     const history = createMemoryHistory()
     render(
       <Router location={history.location} navigator={history}>
@@ -35,5 +35,5 @@ describe('Router function', () => {
     )
     const textRegister = screen.getByText(/register/i)
     expect(textRegister).toBeInTheDocument()
-  })
+  }) */
 })

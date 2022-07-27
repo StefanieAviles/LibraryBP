@@ -3,8 +3,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #6077a6b8;
-  margin: 10% 35%;
+  border: 1px solid rgba(128, 128, 128, 0.229);
+  margin: 8% 37%;
   border-radius: 10px;
   padding: 50px;
 }
@@ -42,7 +42,7 @@ a{
   color: blue;
 }
 a:hover{
-  color: white;
+  color: black;
 }
 
 @keyframes App-logo-spin {
@@ -55,7 +55,32 @@ a:hover{
 }
 span{
   color: red;
-  font-size:small;
+  font-size:smaller;
   font-weight:bold;
   align-self:flex-start;
+  margin-left:28px;
+  margin-top: -10px;
+}
+label{
+  align-self: flex-start;
+  margin-left: 30px;
+}
+input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 15px 0px;
+  width: 290px;
+  height: 30px;
+  margin-top: 5px;
+}
+
+.buttonsContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-width: 350px;
+  padding: 25px;
+  background-color: #f3f3f3;
+  align-self: flex-end;
 }

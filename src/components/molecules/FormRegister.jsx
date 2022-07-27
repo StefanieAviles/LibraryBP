@@ -1,14 +1,12 @@
-import { useRef } from 'react'
 import { Button } from '../atoms/Button/Button'
-import { useNavigate, useLocation } from 'react-router-dom'
 import { useState } from 'react'
-export function FormRegister() {
-  const usernameRef = useRef()
-  const passwordRef = useRef()
-  const passwordConfRef = useRef()
-  const emailRef = useRef()
-  let navigate = useNavigate()
-  let location = useLocation()
+import { Input } from '../atoms/Input/Input'
+
+export function FormRegister({ navigateFunction, locationFunction }) {
+  const [userName, setUserName] = useState('')
+  const [password, setPassword] = useState('')
+  const [passwordConfirm, setPasswordConfirm] = useState('')
+  const [email, setEmail] = useState('')
   const [errorUser, setErrorUser] = useState('')
   const [errorEmail, setErrorEmail] = useState('')
   const [errorPassword, setErrorPassword] = useState('')
@@ -18,14 +16,10 @@ export function FormRegister() {
     setErrorPassword('')
     setErrorEmail('')
     setErrorPasswordConf('')
-    const userName = usernameRef.current.value
-    const password = passwordRef.current.value
-    const passwordConfirm = passwordConfRef.current.value
-    const email = emailRef.current.value
     //alert(userInputRef.current.value + userPasswordRef.current.value)
     if (userName && password && passwordConfirm && email) {
       alert('REGISTRO CORRECTO')
-      navigate('/' + location.search)
+      navigateFunction('/home' + locationFunction.search)
     } else {
       if (!userName) {
         setErrorUser('*Campo es requerido')
@@ -43,16 +37,21 @@ export function FormRegister() {
   }
   return (
     <form className="form">
-      <input type="text" placeholder="Usuario" ref={usernameRef}></input>
+      <Input placeholder="Usuario" functionSet={setUserName} set={userName} role="text" />
       <span>{errorUser}</span>
       <br></br>
-      <input type="text" placeholder="E-mail" ref={emailRef}></input>
+      <Input placeholder="Email" functionSet={setEmail} set={email} role="text" />
       <span>{errorEmail}</span>
       <br></br>
-      <input type="password" placeholder="Contrasena" ref={passwordRef}></input>
+      <Input placeholder="Contrasena" functionSet={setPassword} set={password} role="password" />
       <span>{errorPassword}</span>
       <br></br>
-      <input type="password" placeholder="Confirmar Contrasena" ref={passwordConfRef}></input>
+      <Input
+        placeholder="Confirmar contrasena"
+        functionSet={setPasswordConfirm}
+        set={passwordConfirm}
+        role="password"
+      />
       <span>{errorPasswordConf}</span>
       <br></br>
       <Button color="primary" size="small" onClick={go}>

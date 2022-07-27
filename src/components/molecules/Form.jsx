@@ -1,21 +1,16 @@
-import { useRef } from 'react'
 import { Button } from '../atoms/Button/Button'
 import users from '../../Users.json'
-import { useNavigate, useLocation } from 'react-router-dom'
 import { useState } from 'react'
+import { Input } from '../atoms/Input/Input'
 
-export function Form() {
-  const userInputRef = useRef()
-  const userPasswordRef = useRef()
-  let navigate = useNavigate()
-  let location = useLocation()
+export function Form({ navigateFunction, locationFunction }) {
   const [errorUser, setErrorUser] = useState('')
   const [errorPassword, setErrorPassword] = useState('')
+  const [userName, setUserName] = useState('')
+  const [password, setPassword] = useState('')
   const go = () => {
     setErrorUser('')
     setErrorPassword('')
-    const userName = userInputRef.current.value
-    const password = userPasswordRef.current.value
     if (!userName) {
       setErrorUser('*Campo es requerido')
     }
@@ -23,11 +18,13 @@ export function Form() {
       setErrorPassword('*Campo es requerido')
     }
     if (userName !== '' && password !== '') {
+      console.log(userName + password)
       let results = users.Users.filter(
         (user) => user.username === userName && user.password === password
       )
+      console.log(results)
       if (results.length > 0) {
-        navigate('/home' + location.search)
+        navigateFunction('/home' + locationFunction.search)
       } else {
         alert('CREDENCIALES INCORRECTAS')
       }
@@ -35,15 +32,19 @@ export function Form() {
   }
   return (
     <form className="form">
-      <input type="text" placeholder="Usuario" ref={userInputRef}></input>
+      <label>Correo electronico</label>
+      <Input placeholder="Ej. some@example.com" functionSet={setUserName} role="text" />
       <span>{errorUser}</span>
       <br></br>
-      <input type="password" placeholder="Contrasena" ref={userPasswordRef}></input>
+      <label>Contrasena</label>
+      <Input placeholder="******" functionSet={setPassword} role="password" />
       <span>{errorPassword}</span>
-      <br></br>
-      <Button color="primary" size="small" onClick={go}>
-        LogIn
-      </Button>
+      <div className="buttonsContainer">
+        <a href="http://localhost:3000/register">Registrate aqui</a>
+        <Button color="primary" size="small" onClick={go}>
+          Iniciar Sesion
+        </Button>
+      </div>
     </form>
   )
 }
