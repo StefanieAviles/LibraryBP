@@ -1,4 +1,4 @@
-import { FormRegister } from '../molecules/FormRegister'
+import { FormRegister } from '../molecules/FormRegister/FormRegister'
 
 export function Register({ navigateFunction, locationFunction }) {
   return (

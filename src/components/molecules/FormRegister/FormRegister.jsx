@@ -1,6 +1,8 @@
-import { Button } from '../atoms/Button/Button'
+import { Button } from '../../atoms/Button/Button'
 import { useState } from 'react'
-import { Input } from '../atoms/Input/Input'
+import { Input } from '../../atoms/Input/Input'
+import { createUser } from '../../../Funciones/Funciones'
+import { validations } from '../../../validations/validations'
 
 export function FormRegister({ navigateFunction, locationFunction }) {
   const [userName, setUserName] = useState('')
@@ -11,15 +13,42 @@ export function FormRegister({ navigateFunction, locationFunction }) {
   const [errorEmail, setErrorEmail] = useState('')
   const [errorPassword, setErrorPassword] = useState('')
   const [errorPasswordConf, setErrorPasswordConf] = useState('')
-  const go = () => {
+  const go = (e) => {
+    e.preventDefault()
     setErrorUser('')
     setErrorPassword('')
     setErrorEmail('')
     setErrorPasswordConf('')
-    //alert(userInputRef.current.value + userPasswordRef.current.value)
-    if (userName && password && passwordConfirm && email) {
-      alert('REGISTRO CORRECTO')
-      navigateFunction('/home' + locationFunction.search)
+    if (
+      validations(
+        userName,
+        email,
+        password,
+        passwordConfirm,
+        setErrorUser,
+        setErrorEmail,
+        setErrorPassword,
+        setErrorPasswordConf
+      )
+    ) {
+      createUser(userName, email, password)
+        .then(() => {
+          alert('REGISTRO CORRECTO')
+          navigateFunction('/' + locationFunction.search)
+        })
+        .catch(() => {
+          alert('Usuario no registrado')
+        })
+    }
+    /* if (userName && password && passwordConfirm && email) {
+      createUser(userName, email, password)
+        .then(() => {
+          alert('REGISTRO CORRECTO')
+          navigateFunction('/' + locationFunction.search)
+        })
+        .catch(() => {
+          alert('Usuario no registrado')
+        })
     } else {
       if (!userName) {
         setErrorUser('*Campo es requerido')
@@ -33,7 +62,7 @@ export function FormRegister({ navigateFunction, locationFunction }) {
       if (!email) {
         setErrorEmail('*Campo es requerido')
       }
-    }
+    } */
   }
   return (
     <form className="form">
@@ -43,20 +72,28 @@ export function FormRegister({ navigateFunction, locationFunction }) {
       <Input placeholder="Email" functionSet={setEmail} set={email} role="text" />
       <span>{errorEmail}</span>
       <br></br>
-      <Input placeholder="Contrasena" functionSet={setPassword} set={password} role="password" />
+      <Input
+        placeholder="Contrasena"
+        type="password"
+        functionSet={setPassword}
+        set={password}
+        role="password"
+      />
       <span>{errorPassword}</span>
       <br></br>
       <Input
         placeholder="Confirmar contrasena"
+        type="password"
         functionSet={setPasswordConfirm}
         set={passwordConfirm}
         role="password"
       />
       <span>{errorPasswordConf}</span>
       <br></br>
-      <Button color="primary" size="small" onClick={go}>
+      <button onClick={go}> Registrarse </button>
+      {/* <Button color="primary" size="small" onClick={go}>
         LogIn
-      </Button>
+      </Button> */}
     </form>
   )
 }

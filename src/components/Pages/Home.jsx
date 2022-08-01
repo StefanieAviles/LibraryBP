@@ -3,13 +3,23 @@ import { TitleBar } from '../molecules/TitleBar/TitleBar'
 import { SearchBar } from '../molecules/SearchBar/SearchBar'
 import { Board } from '../Organisms/Board/Board'
 
-export function Home() {
+export function Home({
+  setBookById,
+  navigateFunction,
+  locationFunction,
+  searchValue,
+  setSearchValue
+}) {
   return (
     <>
       <Header></Header>
       <TitleBar></TitleBar>
       <SearchBar></SearchBar>
-      <Board></Board>
+      <Board
+        setBookById={setBookById}
+        navigateFunction={navigateFunction}
+        locationFunction={locationFunction}
+      ></Board>
     </>
   )
 }

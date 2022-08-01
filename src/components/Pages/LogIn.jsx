@@ -1,4 +1,4 @@
-import { Form } from '../molecules/Form'
+import { Form } from '../molecules/FormLogin/Form'
 
 export function LogIn({ navigateFunction, locationFunction }) {
   return (

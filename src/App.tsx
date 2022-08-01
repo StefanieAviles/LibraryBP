@@ -5,20 +5,39 @@ import { LogIn } from './components/Pages/LogIn'
 import { Home } from './components/Pages/Home'
 import { Register } from './components/Pages/Register'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { BookInfo } from './components/Pages/BookInfo'
+import { useState } from 'react'
 
-function App() {
+export default function App() {
   const navigate = useNavigate()
   const location = useLocation()
+  const [bookById, setBookById] = useState({})
+  const [searchValue, setSearchValue] = useState('')
   return (
     <Routes>
       <Route path="/" element={<LogIn navigateFunction={navigate} locationFunction={location} />} />
-      <Route path="/home" element={<Home />} />
+      <Route
+        path="/home"
+        element={
+          <Home
+            setBookById={setBookById}
+            navigateFunction={navigate}
+            locationFunction={location}
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+          />
+        }
+      />
       <Route
         path="/register"
         element={<Register navigateFunction={navigate} locationFunction={location} />}
       />
+      <Route
+        path="/info"
+        element={
+          <BookInfo navigateFunction={navigate} locationFunction={location} bookById={bookById} />
+        }
+      />
     </Routes>
   )
 }
-
-export default App

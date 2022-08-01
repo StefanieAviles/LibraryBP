@@ -1,0 +1,29 @@
+.item{
+    display: flex;
+    height:203px;
+    font-weight: bold;
+}
+.card{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.book{
+    display: flex;
+    width: 200px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 8px;
+    box-shadow: 2px 2px 2px 2px #80808030;
+}
+.nameBook{
+    font-size:15px;
+    font-weight:bold;
+}
+.subtitleBook{
+    font-size:10px;
+}
+.book:hover {
+    opacity: 0.6;
+}

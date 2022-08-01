@@ -6,11 +6,10 @@ import './SearchBar.css'
 
 export function SearchBar() {
   const [searchBook, setUserSearchBook] = useState('')
-  const [categories, setCategories] = useState('')
+  const [categories, setCategories] = useState([])
   useEffect(() => {
-    setCategories(booksByCategory(setCategories))
+    booksByCategory(setCategories)
   }, [])
-  console.log(categories)
   return (
     <section className="containerSearch">
       <div className="divSearch1">
