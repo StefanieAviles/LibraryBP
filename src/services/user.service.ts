@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import { DataLogin } from '../interfaces/interfaces'
 const API_URL = process.env.REACT_APP_API_URL as string
 
 export interface FirebaseWrapper<T> {
@@ -11,10 +11,7 @@ export interface User {
   email: string
   token: string
 }
-export interface DataLogin {
-  username: string
-  password: string
-}
+
 export class UserService {
   static async getUsers() {
     const response = await axios.get<User[]>(API_URL)

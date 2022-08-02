@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, EventHandler } from 'react'
 import { Link } from 'react-router-dom'
 import { Input } from '../../atoms/Input/Input'
 import { Button } from '../../atoms/Button/Button'
 import { UserService } from '../../../services/user.service'
+import { DataLogin } from '../interfaces/interfaces'
 import './Login.css'
 
 export function LogIn({ navigateFunction, locationFunction }) {
@@ -26,7 +27,7 @@ export function LogIn({ navigateFunction, locationFunction }) {
     }
   }, [email, password])
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event /* : React.SyntheticEvent */) => {
     event.preventDefault()
     setErr('')
     const userData = { username: email, password: password }

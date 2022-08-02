@@ -1,5 +1,5 @@
 import { FC, InputHTMLAttributes } from 'react'
-import './Input.css'
+import './Input.scss'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   errorMessage?: string
@@ -9,10 +9,12 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 export const Input: FC<InputProps> = (props: InputProps) => {
   const className = props.className ? props.className : 'input'
   return (
-    <div className="inputDiv">
-      <label htmlFor={props.id}>{props.labelMessage}</label>
-      <input className={className} {...props} />
-      <span>{props.errorMessage}</span>
+    <div className={className}>
+      <label htmlFor={props.id} className="input__label">
+        {props.labelMessage}
+      </label>
+      <input className="input__element" {...props} />
+      <span className="input__message-error">{props.errorMessage}</span>
     </div>
   )
 }
