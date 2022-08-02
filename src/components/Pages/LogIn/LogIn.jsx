@@ -13,12 +13,13 @@ export function LogIn({ navigateFunction, locationFunction }) {
   const [err, setErr] = useState('')
 
   useEffect(() => {
+    setErr('')
     if (email.length <= 5 && email.length > 0) {
       setErrorUser('Minimo 5 caracteres')
     } else {
       setErrorUser('')
     }
-    if (email.length <= 5 && email.length > 0) {
+    if (password.length <= 5 && password.length > 0) {
       setErrorPwd('Minimo 5 caracteres')
     } else {
       setErrorPwd('')
@@ -29,18 +30,25 @@ export function LogIn({ navigateFunction, locationFunction }) {
     event.preventDefault()
     setErr('')
     const userData = { username: email, password: password }
-
-    try {
-      const dataUser = await UserService.login(userData)
-      if (dataUser) {
-        localStorage.setItem('token', dataUser.access_token)
-        localStorage.setItem('typeToken', dataUser.tokenType)
-        navigateFunction('/home')
-      } else {
-        setErr('Los datos son incorrectos')
+    if (!email) {
+      setErrorUser('*Campo requerido')
+    }
+    if (!password) {
+      setErrorPwd('*Campo requerido')
+    }
+    if (email && password) {
+      try {
+        const dataUser = await UserService.login(userData)
+        if (dataUser) {
+          localStorage.setItem('token', dataUser.access_token)
+          localStorage.setItem('typeToken', dataUser.tokenType)
+          navigateFunction('/home')
+        } else {
+          setErr('Los datos son incorrectos')
+        }
+      } catch (error) {
+        setErr('Ha ocurrido un error.')
       }
-    } catch (error) {
-      setErr('Ha ocurrido un error.')
     }
   }
 

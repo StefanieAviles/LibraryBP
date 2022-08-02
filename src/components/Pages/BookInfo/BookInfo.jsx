@@ -1,6 +1,8 @@
 import { Header } from '../../molecules/Header/Header'
 import './BookInfo.css'
 import { Button } from '../../atoms/Button/Button'
+import { DataBook } from '../../molecules/DataBook/DataBook'
+
 export function BookInfo({ navigateFunction, locationFunction, bookById }) {
   function go(e) {
     e.preventDefault()
@@ -18,26 +20,14 @@ export function BookInfo({ navigateFunction, locationFunction, bookById }) {
         </Button>
       </div>
       <section className="infoContainer">
-        <div>
-          <img src={bookById.image}></img>
+        <div className="imageDiv">
+          <img className="imgDetail" src={bookById.image}></img>
         </div>
         <div className="dataContainer">
-          <div className="itemInfo">
-            <p className="title">Titulo</p>
-            <p>{bookById.title}</p>
-          </div>
-          <div className="itemInfo">
-            <p className="title">Autor</p>
-            <p>{bookById.author}</p>
-          </div>
-          <div className="itemInfo">
-            <p className="title">URL del libro</p>
-            <p>{bookById.url}</p>
-          </div>
-          <div className="itemInfo">
-            <p className="title">Resumen</p>
-            <p>{bookById.resume}</p>
-          </div>
+          <DataBook text="Titulo" info={bookById.title}></DataBook>
+          <DataBook text="Autor" info={bookById.author}></DataBook>
+          <DataBook text="URL del libro" info={bookById.url}></DataBook>
+          <DataBook text="Resumen" info={bookById.resume}></DataBook>
         </div>
       </section>
     </>

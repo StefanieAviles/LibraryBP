@@ -5,11 +5,12 @@
 label{
     margin-left: 0px;
     padding-bottom: 5px;
+    margin-top: 10px;
 }
 span{
     color:red;
     margin-left: 0px;
 }
 input{
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }

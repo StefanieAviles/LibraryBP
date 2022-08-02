@@ -3,15 +3,9 @@ import { Button } from './Button'
 
 describe('Button', () => {
   it('should display inner text', async () => {
-    render(<Button>Hazme click</Button>)
-    const buttonFound = await screen.findByText('Hazme click')
+    render(<Button>Iniciar Sesion</Button>)
+    const buttonFound = await screen.findByText('Iniciar Sesion')
     expect(buttonFound).toBeDefined()
-    expect(buttonFound).toHaveTextContent('Hazme click')
-  })
-
-  it('should trigger the click', async () => {
-    //const onClick = jest.fn()
-    render(<Button>LogIn</Button>)
-    const buttonFound = await screen.findByText(/login/i)
+    expect(buttonFound).toHaveTextContent('Iniciar Sesion')
   })
 })

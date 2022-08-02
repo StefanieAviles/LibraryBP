@@ -9,15 +9,15 @@ export function Select({ options }) {
     </select>
   )
 }
-/* import { FC, useEffect, useRef } from 'react'
+/* import { FC, SelectHTMLAttributes } from 'react'
 
-export interface SelectProps {
-  options?: object
+interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+  options?: string[]
 }
 
 export const Select: FC<SelectProps> = (props: SelectProps) => {
   return (
-    <select>
+    <select {...props}>
       {props.options.map((item, i) => (
         <option value={i} key={i}>
           {item.description}

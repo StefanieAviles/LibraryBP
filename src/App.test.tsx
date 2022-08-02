@@ -16,19 +16,27 @@ describe('Router function', () => {
         <LogIn navigateFunction={navigateFunction} locationFunction={locationFunction} />
       </Router>
     )
-    const textLogin = screen.getByText(/contrasena/i)
+    const textLogin = screen.getByText(/Iniciar sesión/i)
     expect(textLogin).toBeInTheDocument()
   })
-  /* it('Render Home', () => {
+  it('Render Home', () => {
     const history = createMemoryHistory()
+    const setBookById = jest.fn()
+    const setSearchValue = jest.fn()
     render(
       <Router location={history.location} navigator={history}>
-        <Home />
+        <Home
+          setBookById={setBookById}
+          navigateFunction={navigateFunction}
+          locationFunction={locationFunction}
+          searchValue={''}
+          setSearchValue={setSearchValue}
+        />
       </Router>
     )
     const textHome = screen.getByText(/Biblioteca/i)
     expect(textHome).toBeInTheDocument()
-  }) */
+  })
   it('Render Register', () => {
     const history = createMemoryHistory()
     render(

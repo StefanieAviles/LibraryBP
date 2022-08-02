@@ -1,3 +1,17 @@
+.board{
+    display:flex;
+    width:90%;
+    border-radius: 5px;
+    flex-direction:column;
+    margin: auto;
+}
+.itemBoard{
+    border:1px solid grey;
+    width: 100%;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+}
 .item{
     display: flex;
     height:203px;

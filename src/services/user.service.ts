@@ -50,6 +50,12 @@ export class UserService {
     return response.data
   }
 
+  static booksByCategory = async () => {
+    const response = await axios.get(API_URL + 'category')
+    console.log(response.data)
+    return response.data
+  }
+
   static async getBook(id: string) {
     const response = await axios.get(API_URL + `books/owner/${id}`, {
       headers: {
