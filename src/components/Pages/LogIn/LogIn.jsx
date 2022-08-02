@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom'
 import { Input } from '../../atoms/Input/Input'
 import { Button } from '../../atoms/Button/Button'
 import { UserService } from '../../../services/user.service'
-import { DataLogin } from '../interfaces/interfaces'
+import { DataLogin } from '../../../interfaces/interfaces'
 import './Login.css'
 
-export function LogIn({ navigateFunction, locationFunction }) {
+export function LogIn({ navigateFunction }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorUser, setErrorUser] = useState('')

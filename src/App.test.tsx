@@ -13,7 +13,7 @@ describe('Router function', () => {
     const history = createMemoryHistory()
     render(
       <Router location={history.location} navigator={history}>
-        <LogIn navigateFunction={navigateFunction} locationFunction={locationFunction} />
+        <LogIn navigateFunction={navigateFunction} />
       </Router>
     )
     const textLogin = screen.getByText(/Iniciar sesión/i)

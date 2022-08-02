@@ -15,7 +15,7 @@ export default function App() {
   const [searchValue, setSearchValue] = useState('')
   return (
     <Routes>
-      <Route path="/" element={<LogIn navigateFunction={navigate} locationFunction={location} />} />
+      <Route path="/" element={<LogIn navigateFunction={navigate} />} />
       <Route
         path="/home"
         element={
