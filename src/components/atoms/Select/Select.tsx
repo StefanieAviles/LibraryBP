@@ -1,5 +1,5 @@
 import { FC, SelectHTMLAttributes } from 'react'
-import ICategory from '../../../interfaces/ICategory'
+import { ICategory } from '../../../interfaces/interfaces'
 
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   options: ICategory[]
