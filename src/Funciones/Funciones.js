@@ -26,6 +26,7 @@ const userExists = async (user) => {
 const postLogin = async (user, password) => {
   const userData = { username: user, password: password }
   const peticion = await axios.post('https://cangular-api.herokuapp.com/users/login', userData)
+  console.log(peticion.data)
   return peticion.data
 }
 const getAllBooks = async (state) => {

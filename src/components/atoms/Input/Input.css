@@ -1,0 +1,15 @@
+.inputDiv{
+    display: flex;
+    flex-direction: column;
+}
+label{
+    margin-left: 0px;
+    padding-bottom: 5px;
+}
+span{
+    color:red;
+    margin-left: 0px;
+}
+input{
+    margin-bottom: 20px;
+}

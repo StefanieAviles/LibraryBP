@@ -1,11 +1,11 @@
 import React from 'react'
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
-import { LogIn } from './components/Pages/LogIn'
-import { Home } from './components/Pages/Home'
-import { Register } from './components/Pages/Register'
+import { LogIn } from './components/Pages/LogIn/LogIn'
+import { Home } from './components/Pages/Home/Home'
+import { Register } from './components/Pages/Register/Register'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { BookInfo } from './components/Pages/BookInfo'
+import { BookInfo } from './components/Pages/BookInfo/BookInfo'
 import { useState } from 'react'
 
 export default function App() {

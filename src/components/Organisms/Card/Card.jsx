@@ -1,14 +1,13 @@
 import './Card.css'
-import { getBook } from '../../../Funciones/Funciones'
+import { UserService } from '../../../services/user.service'
 
 export function Card({ books, setBookById, navigateFunction, locationFunction }) {
   return (
     <section className="card">
       {books.map((option, item) => {
         function showBook() {
-          getBook(option.id)
+          UserService.getBook(option.id)
             .then((response) => {
-              console.log(response)
               setBookById(response)
               navigateFunction('/info' + locationFunction.search)
             })

@@ -1,6 +1,6 @@
-import { Header } from '../molecules/Header/Header'
+import { Header } from '../../molecules/Header/Header'
 import './BookInfo.css'
-import { Button } from '../atoms/Button/Button'
+import { Button } from '../../atoms/Button/Button'
 export function BookInfo({ navigateFunction, locationFunction, bookById }) {
   function go(e) {
     e.preventDefault()

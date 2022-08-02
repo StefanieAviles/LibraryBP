@@ -1,19 +1,18 @@
-import { FC } from 'react'
+import { FC, InputHTMLAttributes } from 'react'
+import './Input.css'
 
-export interface InputProps {
-  name: string
-  placeholder?: string
-  type?: 'password' | 'text'
-  functionSet?: (value: string) => void
-  value?: string
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  errorMessage?: string
+  labelMessage?: string
 }
 
 export const Input: FC<InputProps> = (props: InputProps) => {
+  const className = props.className ? props.className : 'input'
   return (
-    <input
-      type={props.type}
-      placeholder={props.placeholder}
-      onChange={(e) => props.functionSet?.(e.target.value)}
-    ></input>
+    <div className="inputDiv">
+      <label htmlFor={props.id}>{props.labelMessage}</label>
+      <input className={className} {...props} />
+      <span>{props.errorMessage}</span>
+    </div>
   )
 }

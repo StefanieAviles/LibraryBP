@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import { createMemoryHistory } from 'history'
 import { Router } from 'react-router-dom'
-import { LogIn } from './components/Pages/LogIn'
-import { Home } from './components/Pages/Home'
-import { Register } from './components/Pages/Register'
+import { LogIn } from './components/Pages/LogIn/LogIn'
+import { Home } from './components/Pages/Home/Home'
+import { Register } from './components/Pages/Register/Register'
 
 describe('Router function', () => {
   const navigateFunction = jest.fn()
