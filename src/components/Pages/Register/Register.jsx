@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { UserService } from '../../../services/user.service'
 import { Input } from '../../atoms/Input/Input'
 
-export function Register({ navigateFunction, locationFunction }) {
+export function Register({ navigateFunction }) {
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
@@ -36,16 +36,30 @@ export function Register({ navigateFunction, locationFunction }) {
   const handleSubmit = async (event) => {
     event.preventDefault()
     setErr('')
-    try {
-      const dataCreateUser = await UserService.createUser(userName, email, password)
-      if (dataCreateUser) {
-        alert('REGISTRO CORRECTO')
-        navigateFunction('/')
-      } else {
-        setErr('Los datos son incorrectos')
+    if (!email) {
+      setErrorEmail('*Campo requerido')
+    }
+    if (!password) {
+      setErrorPassword('*Campo requerido')
+    }
+    if (!userName) {
+      setErrorUser('*Campo requerido')
+    }
+    if (!passwordConfirm) {
+      setErrorPasswordConf('*Campo requerido')
+    }
+    if (email && password && userName && passwordConfirm) {
+      try {
+        const dataCreateUser = await UserService.createUser(userName, email, password)
+        if (dataCreateUser) {
+          alert('REGISTRO CORRECTO')
+          navigateFunction('/')
+        } else {
+          setErr('Los datos son incorrectos')
+        }
+      } catch (error) {
+        setErr('Ha ocurrido un error.')
       }
-    } catch (error) {
-      setErr('Ha ocurrido un error.')
     }
   }
   return (
@@ -54,7 +68,7 @@ export function Register({ navigateFunction, locationFunction }) {
       <h1>Register</h1>
       <form className="form">
         <Input
-          onChange={(ev) => setUserName(ev.target.value)}
+          onChange={(ev) => setUserName(ev.currentTarget.value)}
           type="text"
           id="userName"
           value={userName}
@@ -63,7 +77,7 @@ export function Register({ navigateFunction, locationFunction }) {
           errorMessage={errorUser}
         />
         <Input
-          onChange={(ev) => setEmail(ev.target.value)}
+          onChange={(ev) => setEmail(ev.currentTarget.value)}
           type="text"
           id="userEmail"
           value={email}
@@ -72,7 +86,7 @@ export function Register({ navigateFunction, locationFunction }) {
           errorMessage={errorEmail}
         />
         <Input
-          onChange={(ev) => setPassword(ev.target.value)}
+          onChange={(ev) => setPassword(ev.currentTarget.value)}
           type="password"
           id="userPassword"
           value={password}
@@ -81,7 +95,7 @@ export function Register({ navigateFunction, locationFunction }) {
           labelMessage="Contraseña"
         />
         <Input
-          onChange={(ev) => setPasswordConfirm(ev.target.value)}
+          onChange={(ev) => setPasswordConfirm(ev.currentTarget.value)}
           type="password"
           id="passwordConfirm"
           value={passwordConfirm}

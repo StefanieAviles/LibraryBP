@@ -8,7 +8,6 @@ import './Home.css'
 export function Home({
   setBookById,
   navigateFunction,
-  locationFunction,
   searchValue,
   searchCategoryBook,
   setSearchValue,
@@ -51,7 +50,7 @@ export function Home({
               UserService.getBook(option.id)
                 .then((response) => {
                   setBookById(response)
-                  navigateFunction('/info' + locationFunction.search)
+                  navigateFunction('/info')
                 })
                 .catch(() => {})
             }

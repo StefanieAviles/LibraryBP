@@ -1,13 +1,13 @@
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { createMemoryHistory } from 'history'
 import { Router } from 'react-router-dom'
 import { LogIn } from './components/Pages/LogIn/LogIn'
 import { Home } from './components/Pages/Home/Home'
 import { Register } from './components/Pages/Register/Register'
+import { BookInfo } from './components/Pages/BookInfo/BookInfo'
 
 describe('Router function', () => {
   const navigateFunction = jest.fn()
-  const locationFunction = jest.fn()
 
   it('Render Login', () => {
     const history = createMemoryHistory()
@@ -18,6 +18,8 @@ describe('Router function', () => {
     )
     const textLogin = screen.getByText(/Iniciar sesión/i)
     expect(textLogin).toBeInTheDocument()
+    /* fireEvent.click(textLogin)
+    expect(navigateFunction).toBeCalledTimes(1) */
   })
   it('Render Home', () => {
     const history = createMemoryHistory()
@@ -29,7 +31,6 @@ describe('Router function', () => {
         <Home
           setBookById={setBookById}
           navigateFunction={navigateFunction}
-          locationFunction={locationFunction}
           searchValue={''}
           searchCategoryBook={''}
           setSearchValue={setSearchValue}
@@ -44,10 +45,31 @@ describe('Router function', () => {
     const history = createMemoryHistory()
     render(
       <Router location={history.location} navigator={history}>
-        <Register navigateFunction={navigateFunction} locationFunction={locationFunction} />
+        <Register navigateFunction={navigateFunction} />
       </Router>
     )
     const textRegister = screen.getByText(/register/i)
+    expect(textRegister).toBeInTheDocument()
+  })
+  it('Render BookInfo', () => {
+    const history = createMemoryHistory()
+    const book = {
+      id: '2ac4ly00oen',
+      public: true,
+      author: 'Unknow',
+      resume: '',
+      title: 'Learning Angular, 2nd Edition',
+      subtitle: 'A Hands-On Guide to Angular 2 and Angular 4',
+      image: 'https://itbook.store/img/books/9780134576978.png',
+      url: 'https://itbook.store/books/9780134576978',
+      category: 57
+    }
+    render(
+      <Router location={history.location} navigator={history}>
+        <BookInfo navigateFunction={navigateFunction} bookById={book} />
+      </Router>
+    )
+    const textRegister = screen.getByText(/volver/i)
     expect(textRegister).toBeInTheDocument()
   })
 })

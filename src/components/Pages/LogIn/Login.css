@@ -6,7 +6,7 @@
     left: 0;
     right: 0;
 }
-.Login{
+.login{
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -14,7 +14,7 @@
     justify-content: center;
     align-items: center;
 }
-.Login-header{
+.login__header{
     width: 30%;
     height: 50%;
     padding: 20px;
@@ -25,8 +25,12 @@ h1 {
     border-bottom: 1px solid #CEE5D0;
     margin-bottom: 20px;
 }
-.optionRegister{
+.login__register-section{
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
+}
+.login__error-message{
+    color: red;
+    font-weight: bold;
 }

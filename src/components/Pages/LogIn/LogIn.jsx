@@ -27,8 +27,8 @@ export function LogIn({ navigateFunction }) {
     }
   }, [email, password])
 
-  const handleSubmit = async (event /* : React.SyntheticEvent */) => {
-    event.preventDefault()
+  const handleSubmit = async (/* event: React.SyntheticEvent */) => {
+    //event.preventDefault()
     setErr('')
     const userData = { username: email, password: password }
     if (!email) {
@@ -54,12 +54,12 @@ export function LogIn({ navigateFunction }) {
   }
 
   return (
-    <div className="Login">
-      <main className="Login-header">
+    <div className="login">
+      <main className="login__header">
         <h1> Iniciar sesión </h1>
-        <form className="userForm">
+        <form className="login__form">
           <Input
-            onChange={(ev) => setEmail(ev.target.value)}
+            onChange={(ev) => setEmail(ev.currentTarget.value)}
             type="text"
             id="userEmail"
             value={email}
@@ -69,7 +69,7 @@ export function LogIn({ navigateFunction }) {
           />
 
           <Input
-            onChange={(ev) => setPassword(ev.target.value)}
+            onChange={(ev) => setPassword(ev.currentTarget.value)}
             type="password"
             name="password"
             id="userPassword"
@@ -79,13 +79,17 @@ export function LogIn({ navigateFunction }) {
             labelMessage="Contraseña"
           />
 
-          <div className="optionRegister">
-            <Link to={'/register'}> Registrate aquí </Link>
-            <Button size="medium" onClick={(event) => handleSubmit(event)} color="primary">
+          <div className="login__register-section">
+            <a href="/http://localhost:3000/register"> Registrate aquí </a>
+            <Button
+              size="medium"
+              onClick={(/* event */) => handleSubmit(/* event */)}
+              color="primary"
+            >
               Iniciar Sesion
             </Button>
           </div>
-          <span>{err}</span>
+          <span className="login__error-message">{err}</span>
         </form>
       </main>
     </div>
