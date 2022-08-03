@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { Select } from './Select'
 
 describe('Select component', () => {
@@ -12,13 +12,15 @@ describe('Select component', () => {
     expect(selectFound).toBeDefined()
     expect(selectFound).toBeInTheDocument()
   })
-  /* it('should execute the onchange callback', async () => {
+  it('should execute the onchange callback', async () => {
     const onChange = jest.fn()
     render(<Select options={options} onChange={onChange} />)
     const selectFound = await screen.findByText('ONE')
     expect(selectFound).toBeDefined()
     fireEvent.change(selectFound, { target: { value: 'TWO' } })
-    expect(onChange).toBeCalledTimes(1)
+    await waitFor(async () => {
+      expect(onChange).toBeCalledTimes(1)
+    })
     expect(selectFound).toHaveValue('TWO')
-  }) */
+  })
 })

@@ -3,12 +3,14 @@ import { Select } from '../../atoms/Select/Select'
 import { useState, useEffect } from 'react'
 import { UserService } from '../../../services/user.service'
 import { ICategory } from '../../../interfaces/interfaces'
+import { FC } from 'react'
 import './SearchBar.scss'
 
-export function SearchBar(
-  setSearchValue: (value: string) => void,
-  setSearchCategoryBook: () => void
-) {
+export interface SearchBarProps {
+  setSearchValue: (value: string) => void
+  setSearchCategoryBook: (value: string) => void
+}
+export const SearchBar: FC<SearchBarProps> = (props: SearchBarProps) => {
   const [categories, setCategories] = useState<ICategory[]>([])
   useEffect(() => {
     UserService.booksByCategory().then((response: ICategory[]) => {
@@ -25,14 +27,16 @@ export function SearchBar(
         <Input
           placeholder="Ej. Angular, React"
           onChange={(event: React.FormEvent<HTMLInputElement>) =>
-            setSearchValue(event.currentTarget.value)
+            props.setSearchValue(event.currentTarget.value)
           }
           type="text"
         ></Input>
       </div>
       <div className="search__select">
         <Select
-          //onChange={(event) => setSearchCategoryBook(event.target.value)}
+          onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
+            props.setSearchCategoryBook(event.currentTarget.value)
+          }
           options={categories}
         ></Select>
       </div>
