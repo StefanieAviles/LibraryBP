@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import './DataBook.scss'
 
 export interface DataBookProps {
   text: string
@@ -7,8 +8,8 @@ export interface DataBookProps {
 
 export const DataBook: FC<DataBookProps> = (props: DataBookProps) => {
   return (
-    <div className="itemInfo">
-      <p className="title">{props.text}</p>
+    <div className="dataBook">
+      <p className="dataBook__item">{props.text}</p>
       <p>{props.info}</p>
     </div>
   )

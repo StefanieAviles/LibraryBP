@@ -2,10 +2,11 @@ import { Header } from '../../molecules/Header/Header'
 import './BookInfo.css'
 import { Button } from '../../atoms/Button/Button'
 import { DataBook } from '../../molecules/DataBook/DataBook'
+import { Book } from '../../../interfaces/interfaces'
 
-export function BookInfo({ navigateFunction, locationFunction, bookById }) {
-  function go(e) {
-    e.preventDefault()
+export function BookInfo({ navigateFunction, bookById }) {
+  function go() {
+    //e.preventDefault()
     navigateFunction('/home')
   }
   return (

@@ -13,6 +13,7 @@ export default function App() {
   const location = useLocation()
   const [bookById, setBookById] = useState({})
   const [searchValue, setSearchValue] = useState('')
+  const [searchCategoryBook, setSearchCategoryBook] = useState('')
   return (
     <Routes>
       <Route path="/" element={<LogIn navigateFunction={navigate} />} />
@@ -24,7 +25,9 @@ export default function App() {
             navigateFunction={navigate}
             locationFunction={location}
             searchValue={searchValue}
+            searchCategoryBook={searchCategoryBook}
             setSearchValue={setSearchValue}
+            setSearchCategoryBook={setSearchCategoryBook}
           />
         }
       />
@@ -32,12 +35,7 @@ export default function App() {
         path="/register"
         element={<Register navigateFunction={navigate} locationFunction={location} />}
       />
-      <Route
-        path="/info"
-        element={
-          <BookInfo navigateFunction={navigate} locationFunction={location} bookById={bookById} />
-        }
-      />
+      <Route path="/info" element={<BookInfo navigateFunction={navigate} bookById={bookById} />} />
     </Routes>
   )
 }

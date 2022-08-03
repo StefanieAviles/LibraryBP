@@ -23,6 +23,7 @@ describe('Router function', () => {
     const history = createMemoryHistory()
     const setBookById = jest.fn()
     const setSearchValue = jest.fn()
+    const setSearchCategoryBook = jest.fn()
     render(
       <Router location={history.location} navigator={history}>
         <Home
@@ -30,7 +31,9 @@ describe('Router function', () => {
           navigateFunction={navigateFunction}
           locationFunction={locationFunction}
           searchValue={''}
+          searchCategoryBook={''}
           setSearchValue={setSearchValue}
+          setSearchCategoryBook={setSearchCategoryBook}
         />
       </Router>
     )

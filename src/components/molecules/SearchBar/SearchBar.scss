@@ -1,0 +1,20 @@
+.search{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin:20px 190px
+
+    &__input{
+        display: flex;
+        justify-content: flex-start;
+        font-weight: bold;
+        padding-left: 10px;
+        font-size: 20px;
+        width: 50%;
+    }
+    &__select{
+        display: flex;
+        justify-content: flex-end;
+        width: 50%;
+    }
+}

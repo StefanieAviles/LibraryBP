@@ -1,4 +1,4 @@
-import './Header.css'
+import './Header.scss'
 import { FC } from 'react'
 
 export interface HeaderProps {
@@ -7,11 +7,11 @@ export interface HeaderProps {
 }
 export const Header: FC<HeaderProps> = (props: HeaderProps) => {
   return (
-    <section className="container">
-      <div className="divHeader1">
-        <h1>{props.principalText}</h1>
+    <section className="header">
+      <div className="header__h1">
+        <h1 className="header__text">{props.principalText}</h1>
       </div>
-      <div className="divHeader2">
+      <div className="header__h2">
         <h2>{props.secondaryText}</h2>
       </div>
     </section>

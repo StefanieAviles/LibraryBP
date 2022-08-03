@@ -10,17 +10,27 @@ export function Home({
   navigateFunction,
   locationFunction,
   searchValue,
-  setSearchValue
+  searchCategoryBook,
+  setSearchValue,
+  setSearchCategoryBook
 }) {
   const [books, setBooks] = useState([])
   useEffect(() => {
-    UserService.getAllBooks().then((response) => {
-      if (response.items.length > 0) {
-        setBooks(response.items)
-      }
-    })
+    if (!searchValue && !searchCategoryBook) {
+      UserService.getAllBooks().then((response) => {
+        if (response.items.length > 0) {
+          setBooks(response.items)
+        }
+      })
+    } else {
+      UserService.getBooksFilter(searchValue, searchCategoryBook).then((response) => {
+        if (response.items.length > 0) {
+          setBooks(response.items)
+        }
+      })
+    }
     // getAllBooks(setBooks)
-  }, [])
+  }, [searchValue, searchCategoryBook])
   return (
     <>
       <Header principalText="Biblioteca"></Header>
@@ -30,7 +40,10 @@ export function Home({
         buttonColor="secondary"
         buttonSize="medium"
       ></TitleBar>
-      <SearchBar></SearchBar>
+      <SearchBar
+        setSearchValue={setSearchValue}
+        setSearchCategoryBook={setSearchCategoryBook}
+      ></SearchBar>
       <section className="board">
         <section className="card">
           {books.map((option, item) => {

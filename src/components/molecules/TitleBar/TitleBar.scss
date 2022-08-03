@@ -1,0 +1,23 @@
+.titleBar{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-left: 190px;
+    margin-right: 190px;
+    margin-top:20px;
+
+    &__text{
+        display: flex;
+        justify-content: flex-start;
+        font-weight: bold;
+        padding-left: 10px;
+        font-size: 20px;
+        width: 50%;
+
+    }
+    &__button{
+        display: flex;
+        justify-content: flex-end;
+        width: 50%;
+    }
+}

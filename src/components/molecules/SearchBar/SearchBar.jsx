@@ -2,10 +2,9 @@ import { Input } from '../../atoms/Input/Input'
 import { Select } from '../../atoms/Select/Select'
 import { useState, useEffect } from 'react'
 import { UserService } from '../../../services/user.service'
-import './SearchBar.css'
+import './SearchBar.scss'
 
-export function SearchBar() {
-  const [searchBook, setUserSearchBook] = useState('')
+export function SearchBar({ setSearchValue, setSearchCategoryBook }) {
   const [categories, setCategories] = useState([])
   useEffect(() => {
     UserService.booksByCategory().then((response) => {
@@ -15,14 +14,20 @@ export function SearchBar() {
     })
     //booksByCategory(setCategories)
   }, [])
+
   return (
-    <section className="containerSearch">
-      <div className="divSearch1">
-        <Input placeholder="Ej. Angular, React" functionSet={setUserSearchBook} type="text"></Input>
+    <section className="search">
+      <div className="search__input">
+        <Input
+          placeholder="Ej. Angular, React"
+          onChange={(event) => setSearchValue(event.target.value)}
+          type="text"
+        ></Input>
       </div>
-      <div className="divSearch2">
+      <div className="search__select">
         <Select
-          /* functioSet={setUserSearchBook} set={searchBook}  */ options={categories}
+          onChange={(event) => setSearchCategoryBook(event.target.value)}
+          options={categories}
         ></Select>
       </div>
     </section>

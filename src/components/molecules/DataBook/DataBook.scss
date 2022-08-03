@@ -1,0 +1,12 @@
+.dataBook{
+    display: flex;
+    width: 100%;
+    justify-content: left;
+
+    &__item{
+        text-align: left;
+        font-weight: bold;
+        width: 60px;
+        margin-right: 30px;
+    }
+}
