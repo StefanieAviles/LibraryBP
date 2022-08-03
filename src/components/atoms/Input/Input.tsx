@@ -6,15 +6,15 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   labelMessage?: string
 }
 
-export const Input: FC<InputProps> = (props: InputProps) => {
-  const className = props.className ? props.className : 'input'
+export const Input: FC<InputProps> = ({ errorMessage, labelMessage, onChange, ...rest }) => {
+  const className = rest.className ? rest.className : 'input'
   return (
     <div className={className}>
-      <label htmlFor={props.id} className="input__label">
-        {props.labelMessage}
+      <label htmlFor={rest.id} className="input__label">
+        {labelMessage}
       </label>
-      <input className="input__element" {...props} />
-      <span className="input__message-error">{props.errorMessage}</span>
+      <input className="input__element" onChange={onChange} {...rest} />
+      <span className="input__message-error">{errorMessage}</span>
     </div>
   )
 }
