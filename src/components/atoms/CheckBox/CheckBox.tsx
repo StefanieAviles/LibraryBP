@@ -31,7 +31,7 @@ export const CheckBox: FC<CheckBoxProps> = (props: CheckBoxProps) => {
     }
   }
   return (
-    <div className="checkBox">
+    <div className="check-box">
       <input
         type="checkbox"
         value={props.options.id}

@@ -43,15 +43,12 @@ export const LogIn: FC<LogInProps> = (props: LogInProps) => {
     if (email && password) {
       try {
         const dataUser = await UserService.login(userData)
-        console.log('Aquiiii', dataUser, localStorage.setItem)
         if (dataUser) {
-          console.log('Aquiiii2', dataUser)
           localStorage.setItem(
             'token',
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZCI6Inc3cWZzYTVmMjEiLCJ1c2VybmFtZSI6ImtzdWFyZXoifSwiaWF0IjoxNjU0Mzc1MDE1LCJleHAiOjE2NTQzOTY2MTV9.AeX_NtUGoCEv7LKw8hijQI3shuCpoIatQBtdQUkgWj0'
           )
           localStorage.setItem('typeToken', 'Bearer')
-          console.log('aqquiii3', props.navigateFunction)
           props.navigateFunction('/home')
         } else {
           setErr('Los datos son incorrectos')
