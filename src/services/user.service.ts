@@ -1,5 +1,5 @@
-import axios from 'axios'
-import { DataLogin } from '../interfaces/interfaces'
+import axios, { AxiosResponse } from 'axios'
+import { DataLogin, Book } from '../interfaces/interfaces'
 const API_URL = process.env.REACT_APP_API_URL as string
 
 export interface FirebaseWrapper<T> {
@@ -34,7 +34,10 @@ export class UserService {
   }
 
   static async getAllBooks() {
-    const response = await axios.post(
+    const response: AxiosResponse<{
+      count: number
+      items: Book[]
+    }> = await axios.post(
       API_URL + 'books/filter',
       {},
       {
@@ -63,7 +66,10 @@ export class UserService {
   }
 
   static async getBooksFilter(title: string, category: string) {
-    const response = await axios.post(
+    const response: AxiosResponse<{
+      count: number
+      items: Book[]
+    }> = await axios.post(
       API_URL + 'books/filter',
       {
         title: title,

@@ -2,7 +2,7 @@ import './Header.scss'
 import { FC } from 'react'
 
 export interface HeaderProps {
-  principalText?: string
+  principalText: string
   secondaryText?: string
 }
 export const Header: FC<HeaderProps> = (props: HeaderProps) => {

@@ -6,19 +6,23 @@ export type ButtonColor = 'complementary' | 'destructive' | 'primary' | 'seconda
 
 export type ButtonSize = 'extra-large' | 'large' | 'medium' | 'small'
 export interface TitleBarProps {
+  navigateFunction: (value: string) => void
   text?: string
   textButton: string
   buttonColor: ButtonColor
   buttonSize: ButtonSize
 }
 export const TitleBar: FC<TitleBarProps> = (props: TitleBarProps) => {
+  const handleSubmit = () => {
+    props.navigateFunction('/newBook')
+  }
   return (
     <section className="titleBar">
       <div className="titleBar__text">
         <h2>{props.text}</h2>
       </div>
       <div className="titleBar__button">
-        <Button color={props.buttonColor} size={props.buttonSize}>
+        <Button color={props.buttonColor} onClick={() => handleSubmit()} size={props.buttonSize}>
           {props.textButton}
         </Button>
       </div>

@@ -1,0 +1,21 @@
+.newBook{
+    display: flex;
+    flex-direction: column;
+    &__title{
+        margin: 15px ;
+    }
+    &__container-inputs{
+        display: flex;
+        margin: 15px 35px;
+        width: 100%;
+        justify-content:space-evenly;
+    }
+    &newBook__inputs{
+        width: 50%;
+    }
+    &__container-checkbox{
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        margin: 15px;
+    }
+}

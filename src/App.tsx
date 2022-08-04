@@ -7,10 +7,26 @@ import { Register } from './components/Pages/Register/Register'
 import { useNavigate } from 'react-router-dom'
 import { BookInfo } from './components/Pages/BookInfo/BookInfo'
 import { useState } from 'react'
+import { Book } from './interfaces/interfaces'
+import { NewBook } from './components/Pages/NewBook/NewBook'
 
 export default function App() {
   const navigate = useNavigate()
-  const [bookById, setBookById] = useState({})
+  const [bookById, setBookById] = useState<Book>({
+    id: '',
+    public: true,
+    author: '',
+    resume: '',
+    title: '',
+    subtitle: '',
+    image: '',
+    url: '',
+    category: {
+      id: '',
+      description: ''
+    },
+    userRegister: ''
+  })
   const [searchValue, setSearchValue] = useState('')
   const [searchCategoryBook, setSearchCategoryBook] = useState('')
   return (
@@ -31,6 +47,7 @@ export default function App() {
       />
       <Route path="/register" element={<Register navigateFunction={navigate} />} />
       <Route path="/info" element={<BookInfo navigateFunction={navigate} bookById={bookById} />} />
+      <Route path="/newBook" element={<NewBook navigateFunction={navigate} />} />
     </Routes>
   )
 }

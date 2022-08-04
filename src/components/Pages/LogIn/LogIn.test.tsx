@@ -1,13 +1,12 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { LogIn } from './LogIn'
-import { Input } from '../../atoms/Input/Input'
+import { UserService } from '../../../services/user.service'
 
 describe('LogIn component', () => {
   const navigateFunction = jest.fn()
-
-  it('should render with password error', async () => {
+  it('should render with password error', () => {
     render(<LogIn navigateFunction={navigateFunction} />)
-    const inputPassword = await screen.getByPlaceholderText('*****')
+    const inputPassword = screen.getByPlaceholderText('*****')
     expect(inputPassword).toBeDefined()
     expect(inputPassword).toBeInTheDocument()
 
@@ -15,19 +14,19 @@ describe('LogIn component', () => {
     expect(screen.getByText('Minimo 5 caracteres')).toBeInTheDocument()
   })
 
-  it('should render with email error', async () => {
+  it('should render with email error', () => {
     render(<LogIn navigateFunction={navigateFunction} />)
-    const inputPassword = await screen.getByPlaceholderText('Ej. name@example.com')
-    expect(inputPassword).toBeDefined()
-    expect(inputPassword).toBeInTheDocument()
+    const inputEmail = screen.getByPlaceholderText('Ej. name@example.com')
+    expect(inputEmail).toBeDefined()
+    expect(inputEmail).toBeInTheDocument()
 
-    fireEvent.change(inputPassword, { target: { value: '123' } })
+    fireEvent.change(inputEmail, { target: { value: '123' } })
     expect(screen.getByText('Minimo 5 caracteres')).toBeInTheDocument()
   })
 
-  it('should render with error of login', async () => {
+  it('should render with error of login', () => {
     render(<LogIn navigateFunction={navigateFunction} />)
-    const buttonElement = await screen.getByText('Iniciar Sesion')
+    const buttonElement = screen.getByText('Iniciar Sesion')
     expect(buttonElement).toBeDefined()
     expect(buttonElement).toBeInTheDocument()
 
@@ -35,9 +34,23 @@ describe('LogIn component', () => {
     expect(screen.getAllByText('*Campo requerido')[0]).toBeInTheDocument()
   })
 
-  /* it('should render with className', async () => {
+  it.skip('should render login successfuly with email and password', () => {
+    const value = {
+      username: 'ksuarez',
+      password: 'adm12345'
+    }
+    jest.spyOn(UserService, 'login').mockResolvedValue(value)
     render(<LogIn navigateFunction={navigateFunction} />)
-    const labelFound = await screen.findByText('Contraseña')
-    expect(labelFound).toHaveClass('input__label')
-  }) */
+    const inputEmail = screen.getByPlaceholderText('Ej. name@example.com')
+    const inputPassword = screen.getByPlaceholderText('*****')
+    const buttonElement = screen.getByText('Iniciar Sesion')
+    expect(buttonElement).toBeDefined()
+    expect(buttonElement).toBeInTheDocument()
+
+    fireEvent.change(inputEmail, { target: { value: 'ksuarez' } })
+    fireEvent.change(inputPassword, { target: { value: 'adm12345' } })
+    fireEvent(buttonElement, new CustomEvent('clickbutton', { detail: '' }))
+    expect(navigateFunction).toBeCalledTimes(1)
+    //expect(screen.getByText('Ha ocurrido un error.')).toBeInTheDocument()
+  })
 })

@@ -62,7 +62,11 @@ describe('Router function', () => {
       subtitle: 'A Hands-On Guide to Angular 2 and Angular 4',
       image: 'https://itbook.store/img/books/9780134576978.png',
       url: 'https://itbook.store/books/9780134576978',
-      category: 57
+      category: {
+        id: '57',
+        description: 'action'
+      },
+      userRegister: 'asghf54555'
     }
     render(
       <Router location={history.location} navigator={history}>

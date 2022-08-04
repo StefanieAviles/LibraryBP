@@ -18,3 +18,7 @@ export interface Book {
   category: ICategory
   userRegister: string
 }
+export interface AllBooks {
+  count: number
+  items: Book[]
+}

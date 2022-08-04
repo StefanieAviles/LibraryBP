@@ -1,9 +1,12 @@
 import { Button } from '../../atoms/Button/Button'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, FC } from 'react'
 import { UserService } from '../../../services/user.service'
 import { Input } from '../../atoms/Input/Input'
 
-export function Register({ navigateFunction }) {
+export interface RegisterProps {
+  navigateFunction: (value: string) => void
+}
+export const Register: FC<RegisterProps> = (props: RegisterProps) => {
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
@@ -33,8 +36,7 @@ export function Register({ navigateFunction }) {
       setErrorPasswordConf('')
     }
   }, [email, password, userName, passwordConfirm])
-  const handleSubmit = async (event) => {
-    event.preventDefault()
+  const handleSubmit = async () => {
     setErr('')
     if (!email) {
       setErrorEmail('*Campo requerido')
@@ -53,7 +55,7 @@ export function Register({ navigateFunction }) {
         const dataCreateUser = await UserService.createUser(userName, email, password)
         if (dataCreateUser) {
           alert('REGISTRO CORRECTO')
-          navigateFunction('/')
+          props.navigateFunction('/')
         } else {
           setErr('Los datos son incorrectos')
         }
@@ -101,9 +103,9 @@ export function Register({ navigateFunction }) {
           value={passwordConfirm}
           placeholder="*****"
           errorMessage={errorPasswordConf}
-          labelMessage="Contraseña"
+          labelMessage="Confirmar Contraseña"
         />
-        <Button size="medium" onClick={(event) => handleSubmit(event)} color="primary">
+        <Button size="medium" onClick={() => handleSubmit()} color="primary">
           Registrarse
         </Button>
         <span>{err}</span>

@@ -1,4 +1,4 @@
-import { useState, useEffect, EventHandler } from 'react'
+import { useState, useEffect, FC } from 'react'
 import { Link } from 'react-router-dom'
 import { Input } from '../../atoms/Input/Input'
 import { Button } from '../../atoms/Button/Button'
@@ -6,7 +6,10 @@ import { UserService } from '../../../services/user.service'
 import { DataLogin } from '../../../interfaces/interfaces'
 import './Login.css'
 
-export function LogIn({ navigateFunction }) {
+export interface LogInProps {
+  navigateFunction: (value: string) => void
+}
+export const LogIn: FC<LogInProps> = (props: LogInProps) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorUser, setErrorUser] = useState('')
@@ -41,9 +44,12 @@ export function LogIn({ navigateFunction }) {
       try {
         const dataUser = await UserService.login(userData)
         if (dataUser) {
-          localStorage.setItem('token', dataUser.access_token)
-          localStorage.setItem('typeToken', dataUser.tokenType)
-          navigateFunction('/home')
+          localStorage.setItem(
+            'token',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZCI6Inc3cWZzYTVmMjEiLCJ1c2VybmFtZSI6ImtzdWFyZXoifSwiaWF0IjoxNjU0Mzc1MDE1LCJleHAiOjE2NTQzOTY2MTV9.AeX_NtUGoCEv7LKw8hijQI3shuCpoIatQBtdQUkgWj0'
+          )
+          localStorage.setItem('typeToken', 'Bearer')
+          props.navigateFunction('/home')
         } else {
           setErr('Los datos son incorrectos')
         }
@@ -80,7 +86,7 @@ export function LogIn({ navigateFunction }) {
           />
 
           <div className="login__register-section">
-            <a href="/http://localhost:3000/register"> Registrate aquí </a>
+            <a href="http://localhost:3000/register"> Registrate aquí </a>
             <Button
               size="medium"
               onClick={(/* event */) => handleSubmit(/* event */)}
