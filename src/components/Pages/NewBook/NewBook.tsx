@@ -19,14 +19,15 @@ export const NewBook: FC<NewBookProps> = (props: NewBookProps) => {
   const [errorImageBook, setErrorImageBook] = useState('')
   const [categories, setCategories] = useState<ICategory[]>([])
   const [checkedState, setCheckedState] = useState<boolean[]>([])
+  const [errorCategories, setErrorCategories] = useState('')
   useEffect(() => {
     UserService.booksByCategory().then((response: ICategory[]) => {
       if (response.length > 0) {
         setCategories(response)
-        setCheckedState(checkedState.fill(false))
+        setCheckedState(new Array(categories.length).fill(false))
       }
     })
-  }, [checkedState])
+  }, [])
   console.log(checkedState)
   return (
     <section className="newBook">
@@ -88,9 +89,12 @@ export const NewBook: FC<NewBookProps> = (props: NewBookProps) => {
             position={index}
             checkedState={checkedState}
             setCheckedState={setCheckedState}
+            categories={categories}
+            setErrorCategories={setErrorCategories}
           ></CheckBox>
         ))}
       </section>
+      <span>{errorCategories}</span>
     </section>
   )
 }
