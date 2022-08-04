@@ -19,7 +19,6 @@ export const CheckBox: FC<CheckBoxProps> = (props: CheckBoxProps) => {
     props.setCheckedState(updatedCheckedState)
     let counter = 0
     props.setErrorCategories('')
-    
     for (let i = 0; i < props.checkedState.length; i++) {
       if (props.checkedState[i] === true) {
         counter++

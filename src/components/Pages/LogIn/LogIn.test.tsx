@@ -2,10 +2,23 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import { LogIn } from './LogIn'
 import { UserService } from '../../../services/user.service'
 
+let navigateFunction: any = null
+let spy: any = null
+
+//jest.spyOn(localStorage, 'setItem').mockImplementation(() => {})
+//global.localStorage = localStorageMock;
 describe('LogIn component', () => {
-  const navigateFunction = jest.fn()
-  it('should render with password error', () => {
+  beforeEach(() => {
+    const value = {
+      username: 'ksuarez',
+      password: 'adm12345'
+    }
+    jest.spyOn(UserService, 'login').mockResolvedValue(value)
+    spy = jest.spyOn(Storage.prototype, 'setItem')
+    navigateFunction = jest.fn()
     render(<LogIn navigateFunction={navigateFunction} />)
+  })
+  it('should render with password error', () => {
     const inputPassword = screen.getByPlaceholderText('*****')
     expect(inputPassword).toBeDefined()
     expect(inputPassword).toBeInTheDocument()
@@ -15,7 +28,7 @@ describe('LogIn component', () => {
   })
 
   it('should render with email error', () => {
-    render(<LogIn navigateFunction={navigateFunction} />)
+    //render(<LogIn navigateFunction={navigateFunction} />)
     const inputEmail = screen.getByPlaceholderText('Ej. name@example.com')
     expect(inputEmail).toBeDefined()
     expect(inputEmail).toBeInTheDocument()
@@ -25,7 +38,7 @@ describe('LogIn component', () => {
   })
 
   it('should render with error of login', () => {
-    render(<LogIn navigateFunction={navigateFunction} />)
+    //render(<LogIn navigateFunction={navigateFunction} />)
     const buttonElement = screen.getByText('Iniciar Sesion')
     expect(buttonElement).toBeDefined()
     expect(buttonElement).toBeInTheDocument()
@@ -34,13 +47,10 @@ describe('LogIn component', () => {
     expect(screen.getAllByText('*Campo requerido')[0]).toBeInTheDocument()
   })
 
-  it.skip('should render login successfuly with email and password', () => {
-    const value = {
-      username: 'ksuarez',
-      password: 'adm12345'
-    }
-    jest.spyOn(UserService, 'login').mockResolvedValue(value)
-    render(<LogIn navigateFunction={navigateFunction} />)
+  it('should render login successfuly with email and password', () => {
+    //render(<LogIn navigateFunction={navigateFunction} />)
+    const mockNavigateFunction = jest.fn()
+    render(<LogIn navigateFunction={mockNavigateFunction} />)
     const inputEmail = screen.getByPlaceholderText('Ej. name@example.com')
     const inputPassword = screen.getByPlaceholderText('*****')
     const buttonElement = screen.getByText('Iniciar Sesion')
@@ -50,7 +60,7 @@ describe('LogIn component', () => {
     fireEvent.change(inputEmail, { target: { value: 'ksuarez' } })
     fireEvent.change(inputPassword, { target: { value: 'adm12345' } })
     fireEvent(buttonElement, new CustomEvent('clickbutton', { detail: '' }))
-    expect(navigateFunction).toBeCalledTimes(1)
+    expect(mockNavigateFunction).toBeCalledTimes(1)
     //expect(screen.getByText('Ha ocurrido un error.')).toBeInTheDocument()
   })
 })
