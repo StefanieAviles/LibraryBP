@@ -1,7 +1,7 @@
 import { useState, useEffect, FC } from 'react'
 import { Link } from 'react-router-dom'
 import { Input } from '../../atoms/Input/Input'
-import { Button } from '../../atoms/Button/Button'
+import { Button } from '../../atoms/Button/button'
 import { UserService } from '../../../services/user.service'
 import { DataLogin } from '../../../interfaces/interfaces'
 import './Login.scss'
@@ -40,9 +40,11 @@ export const LogIn: FC<LogInProps> = (props: LogInProps) => {
       setErrorPwd('*Campo requerido')
     }
     if (email && password) {
+      /*  console.log('AQUII 1:', userData) */
       try {
         const dataUser = await UserService.login(userData)
-        if (dataUser) {
+        /*    console.log('AQUII 2:', dataUser) */
+        if (dataUser.username && dataUser.password) {
           localStorage.setItem(
             'token',
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZCI6Inc3cWZzYTVmMjEiLCJ1c2VybmFtZSI6ImtzdWFyZXoifSwiaWF0IjoxNjU0Mzc1MDE1LCJleHAiOjE2NTQzOTY2MTV9.AeX_NtUGoCEv7LKw8hijQI3shuCpoIatQBtdQUkgWj0'
@@ -53,6 +55,7 @@ export const LogIn: FC<LogInProps> = (props: LogInProps) => {
           setErr('Los datos son incorrectos')
         }
       } catch (error) {
+        /* console.log('AQUII 5:') */
         setErr('Ha ocurrido un error.')
       }
     }
