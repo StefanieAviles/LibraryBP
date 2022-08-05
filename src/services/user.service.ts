@@ -33,6 +33,32 @@ export class UserService {
     return response.data
   }
 
+  static async createBook(
+    nameBook: string,
+    urlBook: string,
+    resumeBook: string,
+    authorBook: string,
+    imageBook: string,
+    categoriesBook: string[]
+  ) {
+    const newBook = {
+      title: nameBook,
+      author: authorBook,
+      resume: resumeBook,
+      image: imageBook,
+      url: urlBook,
+      category: categoriesBook,
+      public: true
+    }
+    const response = await axios.post(API_URL + 'books/owner', newBook, {
+      headers: {
+        Authorization:
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZCI6Inc3cWZzYTVmMjEiLCJ1c2VybmFtZSI6ImtzdWFyZXoifSwiaWF0IjoxNjU0Mzc1MDE1LCJleHAiOjE2NTQzOTY2MTV9.AeX_NtUGoCEv7LKw8hijQI3shuCpoIatQBtdQUkgWj0'
+      }
+    })
+    return response.data
+  }
+
   static async getAllBooks() {
     const response: AxiosResponse<{
       count: number

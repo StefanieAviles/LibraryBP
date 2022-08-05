@@ -15,7 +15,7 @@ export interface Book {
   subtitle: string
   image: string
   url: string
-  category: ICategory
+  category: string[]
   userRegister: string
 }
 export interface AllBooks {

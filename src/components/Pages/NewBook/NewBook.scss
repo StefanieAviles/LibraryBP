@@ -1,8 +1,8 @@
-.newBook{
+.new-book{
     display: flex;
     flex-direction: column;
     &__title{
-        margin: 15px ;
+        margin: 0px 15px ;
     }
     &__container-inputs{
         display: flex;
@@ -15,7 +15,18 @@
     }
     &__container-checkbox{
         display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        margin: 15px;
+        grid-template-columns: repeat(5);
+        margin: 0px 15px;
     }
+    &__buttons-container{
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 80px;
+
+    }
+    &__button{
+        margin-left: 20px;
+        width: 100px;
+    }
+    
 }

@@ -30,8 +30,7 @@ export const LogIn: FC<LogInProps> = (props: LogInProps) => {
     }
   }, [email, password])
 
-  const handleSubmit = async (/* event: React.SyntheticEvent */) => {
-    //event.preventDefault()
+  const handleSubmit = async () => {
     setErr('')
     const userData = { username: email, password: password }
     if (!email) {
@@ -87,11 +86,7 @@ export const LogIn: FC<LogInProps> = (props: LogInProps) => {
 
           <div className="login__register-section">
             <a href="http://localhost:3000/register"> Registrate aquí </a>
-            <Button
-              size="medium"
-              onClick={(/* event */) => handleSubmit(/* event */)}
-              color="primary"
-            >
+            <Button size="medium" onClick={() => handleSubmit()} color="primary">
               Iniciar Sesion
             </Button>
           </div>

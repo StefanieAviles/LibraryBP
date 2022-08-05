@@ -21,10 +21,7 @@ export default function App() {
     subtitle: '',
     image: '',
     url: '',
-    category: {
-      id: '',
-      description: ''
-    },
+    category: [],
     userRegister: ''
   })
   const [searchValue, setSearchValue] = useState('')

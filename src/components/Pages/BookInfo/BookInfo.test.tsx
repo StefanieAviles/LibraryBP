@@ -12,10 +12,7 @@ describe('LogIn component', () => {
     subtitle: 'A Hands-On Guide to Angular 2 and Angular 4',
     image: 'https://itbook.store/img/books/9780134576978.png',
     url: 'https://itbook.store/books/9780134576978',
-    category: {
-      id: '57',
-      description: 'action'
-    },
+    category: [],
     userRegister: 'asghf54555'
   }
   it('should render with password error', () => {
