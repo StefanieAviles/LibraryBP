@@ -4,7 +4,7 @@ import { SearchBar } from '../../molecules/SearchBar/SearchBar'
 import { UserService } from '../../../services/user.service'
 import { Book } from '../../../interfaces/interfaces'
 import React, { useEffect, useState, FC } from 'react'
-import './Home.css'
+import './Home.scss'
 
 export interface HomeProps {
   setBookById: (value: Book) => void
@@ -13,6 +13,7 @@ export interface HomeProps {
   searchCategoryBook: string
   setSearchValue: (value: string) => void
   setSearchCategoryBook: (value: string) => void
+  setIsEdited: (value: boolean) => void
 }
 export const Home: FC<HomeProps> = (props: HomeProps) => {
   const [books, setBooks] = useState<Book[]>([])
@@ -41,13 +42,14 @@ export const Home: FC<HomeProps> = (props: HomeProps) => {
         textButton="Agregar Libro"
         buttonColor="secondary"
         buttonSize="medium"
+        setIsEdited={props.setIsEdited}
       ></TitleBar>
       <SearchBar
         setSearchValue={props.setSearchValue}
         setSearchCategoryBook={props.setSearchCategoryBook}
       ></SearchBar>
-      <section className="board">
-        <section className="card">
+      <section className="home__board">
+        <section className="home__card">
           {books.map((option: Book, item) => {
             function showBook() {
               UserService.getBook(option.id)
@@ -58,10 +60,10 @@ export const Home: FC<HomeProps> = (props: HomeProps) => {
                 .catch(() => {})
             }
             return (
-              <section key={item} className="book" onClick={showBook}>
-                <img className="item" src={option.image}></img>
-                <p className="nameBook">{option.title}</p>
-                <p className="subtitleBook">{option.subtitle}</p>
+              <section key={item} className="home__book" onClick={showBook}>
+                <img className="home__item" src={option.image}></img>
+                <p className="home__name-book">{option.title}</p>
+                <p className="home__subtitle-book">{option.subtitle}</p>
               </section>
             )
           })}

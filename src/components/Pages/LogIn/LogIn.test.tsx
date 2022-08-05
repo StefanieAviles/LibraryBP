@@ -14,6 +14,7 @@ describe('LogIn component', () => {
       password: 'adm12345'
     }
     jest.spyOn(UserService, 'login').mockResolvedValue(value)
+    jest.spyOn(UserService, 'login').mockRejectedValue({})
     localStorage = jest.spyOn(Storage.prototype, 'setItem')
     navigateFunction = jest.fn()
     render(<LogIn navigateFunction={navigateFunction} />)
@@ -56,6 +57,20 @@ describe('LogIn component', () => {
     waitFor(() => {
       expect(navigateFunction).toBeCalledTimes(1)
       expect(localStorage).toBeCalled()
+    })
+  })
+  it('should render login fail with email and password wrong', async () => {
+    const inputEmail = screen.getByPlaceholderText('Ej. name@example.com')
+    const inputPassword = screen.getByPlaceholderText('*****')
+    const buttonElement = screen.getByText('Iniciar Sesion')
+    expect(buttonElement).toBeDefined()
+    expect(buttonElement).toBeInTheDocument()
+
+    fireEvent.change(inputEmail, { target: { value: 'administrador' } })
+    fireEvent.change(inputPassword, { target: { value: '12345678' } })
+    await fireEvent(buttonElement, new CustomEvent('clickbutton', { detail: '' }))
+    waitFor(() => {
+      expect(screen.getByText('HOLAAAAAA')).toBeInTheDocument()
     })
   })
 })

@@ -26,6 +26,7 @@ describe('Router function', () => {
     const setBookById = jest.fn()
     const setSearchValue = jest.fn()
     const setSearchCategoryBook = jest.fn()
+    const setIsEdited = jest.fn()
     render(
       <Router location={history.location} navigator={history}>
         <Home
@@ -35,6 +36,7 @@ describe('Router function', () => {
           searchCategoryBook={''}
           setSearchValue={setSearchValue}
           setSearchCategoryBook={setSearchCategoryBook}
+          setIsEdited={setIsEdited}
         />
       </Router>
     )
@@ -48,11 +50,12 @@ describe('Router function', () => {
         <Register navigateFunction={navigateFunction} />
       </Router>
     )
-    const textRegister = screen.getByText(/register/i)
+    const textRegister = screen.getByText(/registro/i)
     expect(textRegister).toBeInTheDocument()
   })
   it('Render BookInfo', () => {
     const history = createMemoryHistory()
+    const setIsEdited = jest.fn()
     const book = {
       id: '2ac4ly00oen',
       public: true,
@@ -67,7 +70,7 @@ describe('Router function', () => {
     }
     render(
       <Router location={history.location} navigator={history}>
-        <BookInfo navigateFunction={navigateFunction} bookById={book} />
+        <BookInfo navigateFunction={navigateFunction} bookById={book} setIsEdited={setIsEdited} />
       </Router>
     )
     const textRegister = screen.getByText(/volver/i)

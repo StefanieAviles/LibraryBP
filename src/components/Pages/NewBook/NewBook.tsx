@@ -9,19 +9,25 @@ import './NewBook.scss'
 
 export interface NewBookProps {
   navigateFunction: (value: string) => void
+  bookById: Book
+  isEdited: boolean
 }
 export const NewBook: FC<NewBookProps> = (props: NewBookProps) => {
-  const [nameBook, setNameBook] = useState('')
+  const [nameBook, setNameBook] = useState<string>('')
   const [urlBook, setUrlBook] = useState('')
   const [resumeBook, setResumeBook] = useState('')
   const [authorBook, setAuthorBook] = useState('')
   const [imageBook, setImageBook] = useState('')
   const [errorNameBook, setErrorNameBook] = useState('')
   const [errorImageBook, setErrorImageBook] = useState('')
+  const [errorAuthorBook, setErrorAuthorBook] = useState('')
+  const [errorUrlBook, setErrorUrlBook] = useState('')
+  const [errorResumeBook, setErrorResumeBook] = useState('')
   const [categories, setCategories] = useState<ICategory[]>([])
   const [checkedState, setCheckedState] = useState<boolean[]>([])
-  const [errorCategories, setErrorCategories] = useState('')
+  const [errorCategories, setErrorCategories] = useState('Debe elegir al menos 3 categorias')
   const [categoriesBook, setCategoriesBook] = useState<string[]>([])
+
   useEffect(() => {
     UserService.booksByCategory().then((response: ICategory[]) => {
       if (response.length > 0) {
@@ -29,28 +35,69 @@ export const NewBook: FC<NewBookProps> = (props: NewBookProps) => {
         setCheckedState(new Array(categories.length).fill(false))
       }
     })
-  }, [])
+    if (props.isEdited) {
+      setNameBook(props.bookById.title)
+      setUrlBook(props.bookById.url)
+      setResumeBook(props.bookById.resume)
+      setAuthorBook(props.bookById.author)
+      setImageBook(props.bookById.image)
+    } else {
+      setNameBook('')
+      setUrlBook('')
+      setResumeBook('')
+      setAuthorBook('')
+      setImageBook('')
+    }
+  }, [props.isEdited])
   const handleSubmitCancel = () => {
     props.navigateFunction('/home')
   }
   const handleSubmitUpload = async () => {
-    try {
-      const dataCreateUser = await UserService.createBook(
-        nameBook,
-        urlBook,
-        resumeBook,
-        authorBook,
-        imageBook,
-        categoriesBook
-      )
-      if (dataCreateUser) {
-        alert('REGISTRO CORRECTO')
-        props.navigateFunction('/home')
-      } else {
-        setErrorCategories('Los datos son incorrectos')
+    if (nameBook && imageBook && errorCategories === '' && authorBook && urlBook && resumeBook) {
+      try {
+        const dataCreateUser = await UserService.createBook(
+          nameBook,
+          urlBook,
+          resumeBook,
+          authorBook,
+          imageBook,
+          categoriesBook
+        )
+        if (dataCreateUser) {
+          alert('REGISTRO CORRECTO')
+          props.navigateFunction('/home')
+        } else {
+          setErrorCategories('Los datos son incorrectos')
+        }
+      } catch (error) {
+        setErrorCategories('Ha ocurrido un error.')
       }
-    } catch (error) {
-      setErrorCategories('Ha ocurrido un error.')
+    } else {
+      if (!nameBook) {
+        setErrorNameBook('*Campo requerido')
+      } else {
+        setErrorNameBook('')
+      }
+      if (!imageBook) {
+        setErrorImageBook('*Campo requerido')
+      } else {
+        setErrorImageBook('')
+      }
+      if (!authorBook) {
+        setErrorAuthorBook('*Campo requerido')
+      } else {
+        setErrorAuthorBook('')
+      }
+      if (!resumeBook) {
+        setErrorResumeBook('*Campo requerido')
+      } else {
+        setErrorResumeBook('')
+      }
+      if (!urlBook) {
+        setErrorUrlBook('*Campo requerido')
+      } else {
+        setErrorUrlBook('')
+      }
     }
   }
 
@@ -65,6 +112,7 @@ export const NewBook: FC<NewBookProps> = (props: NewBookProps) => {
             labelMessage="Nombre del Libro:"
             type="text"
             onChange={(ev) => setNameBook(ev.currentTarget.value)}
+            value={nameBook}
             name="nameBook"
             id="nameBook"
             errorMessage={errorNameBook}
@@ -74,16 +122,20 @@ export const NewBook: FC<NewBookProps> = (props: NewBookProps) => {
             labelMessage="URL del Libro:"
             type="text"
             onChange={(ev) => setUrlBook(ev.currentTarget.value)}
+            value={urlBook}
             name="urlBook"
             id="urlBook"
+            errorMessage={errorUrlBook}
           ></Input>
           <Input
             placeholder="Ej. some resume of the book"
             labelMessage="Resumen del Libro:"
             type="textArea"
             onChange={(ev) => setResumeBook(ev.currentTarget.value)}
+            value={resumeBook}
             name="resumeBook"
             id="resumeBook"
+            errorMessage={errorResumeBook}
           ></Input>
         </div>
         <div>
@@ -92,14 +144,17 @@ export const NewBook: FC<NewBookProps> = (props: NewBookProps) => {
             labelMessage="Nombre del autor:"
             type="text"
             onChange={(ev) => setAuthorBook(ev.currentTarget.value)}
+            value={authorBook}
             name="authorBook"
             id="authorBook"
+            errorMessage={errorAuthorBook}
           ></Input>
           <Input
             placeholder="Ej. https://book.jpeg"
             labelMessage="Imagen de portada:"
             type="text"
             onChange={(ev) => setImageBook(ev.currentTarget.value)}
+            value={imageBook}
             name="imageBook"
             id="imageBook"
             errorMessage={errorImageBook}

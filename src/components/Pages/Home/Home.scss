@@ -1,0 +1,39 @@
+.home{
+    &__board{
+        display:flex;
+        width:90%;
+        border-radius: 5px;
+        flex-direction:column;
+        margin: auto;
+    }
+    &__card{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    &__book{
+        display: flex;
+        width: 200px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin: 8px;
+        box-shadow: 2px 2px 2px 2px #80808030;
+        &:hover {
+            opacity: 0.6;
+        }
+    }
+    &__item{
+        display: flex;
+        height:203px;
+        font-weight: bold;
+    }
+    &__name-book{
+        font-size:15px;
+        font-weight:bold;
+    }
+    &__subtitle-book{
+        font-size:10px;
+    }
+
+}

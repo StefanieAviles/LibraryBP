@@ -3,6 +3,7 @@ import { BookInfo } from './BookInfo'
 
 describe('LogIn component', () => {
   const navigateFunction = jest.fn()
+  const setIsEdited = jest.fn()
   const book = {
     id: '2ac4ly00oen',
     public: true,
@@ -16,14 +17,18 @@ describe('LogIn component', () => {
     userRegister: 'asghf54555'
   }
   it('should render with password error', () => {
-    render(<BookInfo navigateFunction={navigateFunction} bookById={book} />)
+    render(
+      <BookInfo navigateFunction={navigateFunction} bookById={book} setIsEdited={setIsEdited} />
+    )
     const data = screen.getByText('Learning Angular, 2nd Edition')
     expect(data).toBeDefined()
     expect(data).toBeInTheDocument()
   })
 
   it('should render with email error', () => {
-    render(<BookInfo navigateFunction={navigateFunction} bookById={book} />)
+    render(
+      <BookInfo navigateFunction={navigateFunction} bookById={book} setIsEdited={setIsEdited} />
+    )
     const button = screen.getByText('Volver')
     expect(button).toBeDefined()
     expect(button).toBeInTheDocument()

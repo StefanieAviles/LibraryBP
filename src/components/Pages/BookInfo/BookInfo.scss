@@ -1,0 +1,36 @@
+
+.book-info{
+    &__buttons-div{
+        display: flex;
+        width: 100%;
+        margin: 30px 50px;
+        flex-direction: row;
+    }
+    &__info-container{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+    &__image-div{
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &__img-detail{
+        width: 50%;
+    }
+    &__data-container{
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+    }
+    &__button{
+        margin-right: 20px;
+        width: 100px;
+    }
+}
+
+
+

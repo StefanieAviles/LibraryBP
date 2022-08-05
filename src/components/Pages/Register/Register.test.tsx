@@ -1,11 +1,21 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { Register } from './Register'
 import { UserService } from '../../../services/user.service'
 
+let navigateFunction: any = null
 describe('LogIn component', () => {
-  const navigateFunction = jest.fn()
-  it('should render with password error', () => {
+  beforeEach(() => {
+    const value = {
+      name: 'ksuarez',
+      email: 'some@gmail.com',
+      password: 'adm12345'
+    }
+    jest.spyOn(UserService, 'createUser').mockResolvedValue(value)
+    jest.spyOn(UserService, 'createUser').mockRejectedValue(false)
+    navigateFunction = jest.fn()
     render(<Register navigateFunction={navigateFunction} />)
+  })
+  it('should render with password error', () => {
     const inputPassword = screen.getAllByPlaceholderText('*****')
     expect(inputPassword).toBeDefined()
     expect(inputPassword[0]).toBeInTheDocument()
@@ -15,7 +25,6 @@ describe('LogIn component', () => {
   })
 
   it('should render with password Confirm error', () => {
-    render(<Register navigateFunction={navigateFunction} />)
     const inputPasswordConfirm = screen.getAllByPlaceholderText('*****')
     expect(inputPasswordConfirm).toBeDefined()
     expect(inputPasswordConfirm[1]).toBeInTheDocument()
@@ -25,7 +34,6 @@ describe('LogIn component', () => {
   })
 
   it('should render with email error', () => {
-    render(<Register navigateFunction={navigateFunction} />)
     const inputEmail = screen.getByPlaceholderText('Ej. some@email.com')
     expect(inputEmail).toBeDefined()
     expect(inputEmail).toBeInTheDocument()
@@ -35,7 +43,6 @@ describe('LogIn component', () => {
   })
 
   it('should render with user error', () => {
-    render(<Register navigateFunction={navigateFunction} />)
     const inputUser = screen.getByPlaceholderText('Ej. somebody')
     expect(inputUser).toBeDefined()
     expect(inputUser).toBeInTheDocument()
@@ -45,12 +52,28 @@ describe('LogIn component', () => {
   })
 
   it('should render with error of register', () => {
-    render(<Register navigateFunction={navigateFunction} />)
     const buttonElement = screen.getByText('Registrarse')
     expect(buttonElement).toBeDefined()
     expect(buttonElement).toBeInTheDocument()
 
     fireEvent(buttonElement, new CustomEvent('clickbutton', { detail: '' }))
     expect(screen.getAllByText('*Campo requerido')[0]).toBeInTheDocument()
+  })
+  it('should render register successfuly with email, username and password', async () => {
+    const inputEmail = screen.getByPlaceholderText('Ej. some@email.com')
+    const inputPassword = screen.getAllByPlaceholderText('*****')
+    const inputUsername = screen.getByPlaceholderText('Ej. somebody')
+    const buttonElement = screen.getByText('Registrarse')
+    expect(buttonElement).toBeDefined()
+    expect(buttonElement).toBeInTheDocument()
+
+    fireEvent.change(inputEmail, { target: { value: 'stefanie@gmail.com' } })
+    fireEvent.change(inputPassword[0], { target: { value: 'adm12345' } })
+    fireEvent.change(inputPassword[1], { target: { value: 'adm12345' } })
+    fireEvent.change(inputUsername, { target: { value: 'Stefanie' } })
+    await fireEvent(buttonElement, new CustomEvent('clickbutton', { detail: '' }))
+    waitFor(() => {
+      expect(navigateFunction).toBeCalledTimes(1)
+    })
   })
 })

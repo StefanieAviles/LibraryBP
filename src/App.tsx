@@ -25,6 +25,7 @@ export default function App() {
     userRegister: ''
   })
   const [searchValue, setSearchValue] = useState('')
+  const [isEdited, setIsEdited] = useState(false)
   const [searchCategoryBook, setSearchCategoryBook] = useState('')
   return (
     <Routes>
@@ -39,12 +40,21 @@ export default function App() {
             searchCategoryBook={searchCategoryBook}
             setSearchValue={setSearchValue}
             setSearchCategoryBook={setSearchCategoryBook}
+            setIsEdited={setIsEdited}
           />
         }
       />
       <Route path="/register" element={<Register navigateFunction={navigate} />} />
-      <Route path="/info" element={<BookInfo navigateFunction={navigate} bookById={bookById} />} />
-      <Route path="/newBook" element={<NewBook navigateFunction={navigate} />} />
+      <Route
+        path="/info"
+        element={
+          <BookInfo navigateFunction={navigate} bookById={bookById} setIsEdited={setIsEdited} />
+        }
+      />
+      <Route
+        path="/newBook"
+        element={<NewBook navigateFunction={navigate} bookById={bookById} isEdited={isEdited} />}
+      />
     </Routes>
   )
 }

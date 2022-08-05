@@ -7,6 +7,7 @@ describe('LogIn component', () => {
   const setBookById = jest.fn()
   const setSearchValue = jest.fn()
   const setSearchCategoryBook = jest.fn()
+  const setIsEdited = jest.fn()
   it('should render with header', () => {
     render(
       <Home
@@ -16,6 +17,7 @@ describe('LogIn component', () => {
         searchCategoryBook=""
         setSearchValue={setSearchValue}
         setSearchCategoryBook={setSearchCategoryBook}
+        setIsEdited={setIsEdited}
       />
     )
     const text = screen.getByText('Biblioteca')
@@ -32,6 +34,7 @@ describe('LogIn component', () => {
         searchCategoryBook=""
         setSearchValue={setSearchValue}
         setSearchCategoryBook={setSearchCategoryBook}
+        setIsEdited={setIsEdited}
       />
     )
     const title = screen.getByText('Tus Libros')

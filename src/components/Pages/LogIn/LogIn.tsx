@@ -4,7 +4,7 @@ import { Input } from '../../atoms/Input/Input'
 import { Button } from '../../atoms/Button/Button'
 import { UserService } from '../../../services/user.service'
 import { DataLogin } from '../../../interfaces/interfaces'
-import './Login.css'
+import './Login.scss'
 
 export interface LogInProps {
   navigateFunction: (value: string) => void
@@ -61,7 +61,7 @@ export const LogIn: FC<LogInProps> = (props: LogInProps) => {
   return (
     <div className="login">
       <main className="login__header">
-        <h1> Iniciar sesión </h1>
+        <h1 className="login__title"> Iniciar sesión </h1>
         <form className="login__form">
           <Input
             onChange={(ev) => setEmail(ev.currentTarget.value)}

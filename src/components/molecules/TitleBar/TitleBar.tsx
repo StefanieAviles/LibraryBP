@@ -11,10 +11,12 @@ export interface TitleBarProps {
   textButton: string
   buttonColor: ButtonColor
   buttonSize: ButtonSize
+  setIsEdited: (value: boolean) => void
 }
 export const TitleBar: FC<TitleBarProps> = (props: TitleBarProps) => {
   const handleSubmit = () => {
     props.navigateFunction('/newBook')
+    props.setIsEdited(false)
   }
   return (
     <section className="titleBar">
