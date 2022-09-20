@@ -10,6 +10,7 @@ describe('SearchBar component', () => {
       <SearchBar setSearchValue={setSearchValue} setSearchCategoryBook={setSearchCategoryBook} />
     )
     const searchFound = await screen.findByPlaceholderText('Ej. Angular, React')
+    console.log(searchFound)
     expect(searchFound).toBeDefined()
     expect(searchFound).toBeInTheDocument()
   })
