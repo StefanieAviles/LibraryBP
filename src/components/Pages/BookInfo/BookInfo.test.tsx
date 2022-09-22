@@ -33,7 +33,14 @@ describe('LogIn component', () => {
     expect(button).toBeDefined()
     expect(button).toBeInTheDocument()
 
+    const buttonEdit = screen.getByText('Editar')
+    expect(buttonEdit).toBeDefined()
+    expect(buttonEdit).toBeInTheDocument()
+
     fireEvent(button, new CustomEvent('clickbutton', { detail: '' }))
     expect(navigateFunction).toBeCalledTimes(1)
+
+    fireEvent(buttonEdit, new CustomEvent('clickbutton', { detail: '' }))
+    expect(setIsEdited).toBeCalledTimes(1)
   })
 })
